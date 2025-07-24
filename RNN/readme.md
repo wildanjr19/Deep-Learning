@@ -1,0 +1,1 @@
+# Implementing RNN from scratch with NumPy
