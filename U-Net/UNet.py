@@ -49,3 +49,24 @@ class UNet(nn.Module):
         self.up_conv_4 = double_conv(128, 64)
 
         self.out = nn.Conv2d(64, 2, kernel_size=1)
+
+    def forward(self, image):
+        # image = [batch_size, channel, height, width]
+
+        # encoder
+        x1 = self.down_conv_1(image) #
+        x2 = self.max_pool(x1)
+        x3 = self.down_conv_2(x2) #
+        x4 = self.max_pool(x3)
+        x5 = self.down_conv_3(x4) #
+        x6 = self.max_pool(x5)
+        x7 = self.down_conv_4(x6) #
+        x8 = self.max_pool(x7)
+        x9 = self.down_conv_5(x8) #
+
+        x = self.up_trans_1(x9)
+        y = crop_img(x7, x)
+        x = self.up_conv_1(torch.cat([x, y], dim=1))
+
+        
+
