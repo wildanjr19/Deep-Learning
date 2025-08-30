@@ -1,0 +1,1 @@
+# Implemented Neural Network from Scratch on few case
